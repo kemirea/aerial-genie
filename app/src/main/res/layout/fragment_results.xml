@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com"
+    tools:context=".FragmentResults"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/window_background">
+
+    <ListView android:id="@+id/results_list_view"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@color/listview_divider"
+        android:dividerHeight="1dp"/>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:weightSum="3">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:id="@+id/search_no_results_text"
+            android:text="No Results"
+            android:visibility="visible"
+            android:layout_weight="1"
+            android:gravity="center"
+            style="@style/AppTheme.SecondaryText"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

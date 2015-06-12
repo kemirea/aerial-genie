@@ -1,0 +1,26 @@
+Genie Pole Move Assistant 
+
+FEATURES
+- Search for pole moves by name.
+- Check off moves as you complete them.
+- Submit new moves.
+- Option to store images and videos locally
+
+MOVE PAGES
+A move page is an entry for a single pole move. Each move page will include the following:
+- A video which shows how to get in and out of the pole move. In the case of holds, a static image of the final position will also be present.
+- Tips on performing the pole move.
+- Alternative names for the pole move.
+- Up to X similar pole moves
+- User-posted comments/tips.
+
+MEDIA
+- Example images and videos will be stored within a cloud-based database.
+- Example images and videos of the X most recently viewed move pages will be cached on the local device, for quick retrieval.
+- User-submitted images and videos will be pulled from Instagram/?.
+
+SIMILAR OPTIONS:
+- Pole Move Box
+- Pole Dance Dictionary
+- Spin City Pole Bible
+- Pocket Pole Studio

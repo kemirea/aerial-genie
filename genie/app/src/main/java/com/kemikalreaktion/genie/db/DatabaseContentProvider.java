@@ -14,9 +14,6 @@ import com.kemikalreaktion.genie.Tag;
 import java.util.List;
 import java.util.Objects;
 
-/**
- * Created by greta.chang on 3/3/2016.
- */
 public class DatabaseContentProvider extends ContentProvider {
     private static final String TAG = Tag.APP_TAG + ".ContentProvider";
 

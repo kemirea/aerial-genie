@@ -8,16 +8,13 @@ import android.util.Log;
 
 import com.kemikalreaktion.genie.Tag;
 
-/**
- * Created by greta.chang on 3/3/2016.
- */
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TAG = Tag.APP_TAG + ".DBHelper";
     private static final String DB_NAME = "Move List";
     private static final int DB_VERSION = 1;
 
-    // sql statements for database creation
-    private static final String CREATE_MOVES_DB = "create table Moves ("
+    // sql statement for moveset table creation
+    private static final String CREATE_MOVESET_DB = "create table moveset ("
             + BaseColumns._ID + " integer primary key auto_increment, "
             + "id integer unique not null, "
             + "name text not null, "
@@ -31,7 +28,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         Log.v(TAG, "onCreate");
-        db.execSQL(CREATE_MOVES_DB);
+
+        // don't know how to trigger an update so just drop the table
+        // and recreate from scratch every time for now
+        db.execSQL("DROP TABLE IF EXISTS moveset");
+        db.execSQL(CREATE_MOVESET_DB);
     }
 
     @Override
@@ -41,7 +42,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         Log.w(TAG, "Upgrading database from version " + oldVersion + " to "
                  + newVersion + ", which will destroy all old data");
-        db.execSQL("DROP TABLE IF EXISTS Moves");
+        db.execSQL("DROP TABLE IF EXISTS moveset");
         onCreate(db);
     }
 }

@@ -101,8 +101,8 @@ public class FragmentNavigationDrawer extends Fragment {
         });
         mDrawerListView.setAdapter(new ArrayAdapter<String>(
                 ((ActionBarActivity) getActivity()).getSupportActionBar().getThemedContext(),
-                android.R.layout.simple_list_item_activated_1,
-                android.R.id.text1,
+                R.layout.drawer_list_item,
+                R.id.list_item_text,
                 new String[]{
                         getString(R.string.title_browse_tricks),
                         getString(R.string.title_your_tricks),

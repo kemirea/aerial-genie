@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<moveset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <move>
+        <id>1</id>
+        <name>Ballerina</name>
+        <img></img>
+    </move>
+    <move>
+        <id>2</id>
+        <name>Fireman Spin</name>
+        <img></img>
+    </move>
+    <move>
+        <id>3</id>
+        <name>Twisted Ballerina</name>
+        <img></img>
+    </move>
+</moveset>

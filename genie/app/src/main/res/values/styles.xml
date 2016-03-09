@@ -77,11 +77,11 @@
 
     <style name="Trick" />
 
-    <style name="Trick.RowStyle" parent="AppTheme">
+    <style name="Trick.RowStyle">
         <item name="android:state_selected">@color/listview_selected</item>
     </style>
 
-    <style name="Trick.RowTextStyle" parent="AppTheme">
+    <style name="Trick.RowTextStyle">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">fill_parent</item>
         <item name="android:textSize">20dp</item>

@@ -23,6 +23,9 @@
     <!-- SEARCH RESULTS -->
     <string name="action_filter">Filter</string>
 
+    <!-- ABOUT PAGE TEXT -->
+    <string name="about_version">"Version "</string>
+
     <string name="sample_text">filler sample text</string>
 
 </resources>

@@ -12,6 +12,15 @@
         <meta-data android:name="android.app.default_searchable"
             android:value=".core.ActivityMain" />
 
+        <provider
+            android:name=".db.DatabaseContentProvider"
+            android:authorities="com.kemikalreaktion.genie"
+            android:readPermission="com.kemikalreaktion.genie.READ_PERMISSION"
+            android:writePermission="com.kemikalreaktion.genie.WRITE_PERMISSION"
+            android:enabled="true"
+            android:exported="false">
+        </provider>
+
         <activity android:name=".core.ActivitySplash" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

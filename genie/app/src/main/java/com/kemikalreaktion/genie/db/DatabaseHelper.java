@@ -15,7 +15,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // sql statement for moveset table creation
     private static final String CREATE_MOVESET_DB = "create table moveset ("
-            + BaseColumns._ID + " integer primary key auto_increment, "
+            + BaseColumns._ID + " integer primary key, "
             + "id integer unique not null, "
             + "name text not null, "
             + "img text"

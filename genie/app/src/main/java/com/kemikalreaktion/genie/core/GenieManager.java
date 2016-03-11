@@ -3,6 +3,7 @@ package com.kemikalreaktion.genie.core;
 import android.app.Application;
 import android.util.Log;
 
+import com.kemikalreaktion.genie.R;
 import com.kemikalreaktion.genie.Tag;
 import com.kemikalreaktion.genie.db.DatabaseContentProvider;
 import com.kemikalreaktion.genie.db.XmlParser;
@@ -30,12 +31,15 @@ public class GenieManager extends Application {
         instance = this;
         trickCatalog = new TrickCatalog();
 
+        TrickCatalog.generateTestCatalog();
+    }
+
+    public void loadData() {
         // read in xml data
         // we really only want to do this when the DB has been updated...
         try {
             XmlParser parser = new XmlParser(this);
-            FileInputStream inStream = openFileInput("countryproviders.xml");
-            InputStream input = new BufferedInputStream(inStream);
+            InputStream input = getResources().openRawResource(R.raw.moveslist);
             parser.parseInput(input);
         }
         catch (FileNotFoundException noFileException) {
@@ -47,8 +51,6 @@ public class GenieManager extends Application {
         catch (XmlPullParserException xmlException) {
             Log.e(TAG, "Error parsing XML. " + xmlException.getMessage());
         }
-
-        TrickCatalog.generateTestCatalog();
     }
 
     public static GenieManager getInstance() {

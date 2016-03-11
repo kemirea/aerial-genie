@@ -3,6 +3,7 @@ package com.kemikalreaktion.genie.db;
 import android.content.ContentValues;
 import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
 
 import com.kemikalreaktion.genie.Tag;
 
@@ -31,7 +32,8 @@ public class XmlParser {
             if (parser.getEventType() != XmlPullParser.START_TAG) {
                 continue;
             }
-            else if (parser.getName().equals("moveset")) {
+
+            if (parser.getName().equals("moveset")) {
                 // start parsing for moveset table
                 parseMoveSet(parser);
             }
@@ -43,6 +45,7 @@ public class XmlParser {
     // parse the list of moves
     private void parseMoveSet(XmlPullParser parser) throws XmlPullParserException, IOException {
         parser.require(XmlPullParser.START_TAG, null, "moveset");
+        Log.d(TAG, "parseMoveSet");
 
         while (parser.next() != XmlPullParser.END_TAG) {
             if (parser.getEventType() != XmlPullParser.START_TAG) {
@@ -62,6 +65,7 @@ public class XmlParser {
     // parse a move
     private void parseMove(XmlPullParser parser) throws XmlPullParserException, IOException {
         parser.require(XmlPullParser.START_TAG, null, "move");
+        Log.d(TAG, "parseMove");
         Uri uriAuthority = Uri.parse(Tag.CONTENT_AUTHORITY + "moveset");
         ContentValues values = new ContentValues();
         String id = "";
@@ -76,12 +80,15 @@ public class XmlParser {
             String tag = parser.getName();
             if ("id".equals(tag)) {
                 id = parseText(parser);
+                Log.d(TAG, "id=" + id);
             }
             else if ("name".equals(tag)) {
                 name = parseText(parser);
+                Log.d(TAG, "name=" + name);
             }
             else if ("img".equals(tag)) {
                 img = parseText(parser);
+                Log.d(TAG, "img=" + img);
             }
         }
 
@@ -94,7 +101,9 @@ public class XmlParser {
     // get text from a field
     private String parseText(XmlPullParser parser) throws XmlPullParserException, IOException {
         String result = "";
-
+        parser.next();
+        result = parser.getText();
+        parser.nextTag();
         return result;
     }
 

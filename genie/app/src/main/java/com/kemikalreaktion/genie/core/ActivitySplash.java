@@ -37,6 +37,12 @@ public class ActivitySplash extends Activity{
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        GenieManager.getInstance().loadData();
+    }
+
+    @Override
     protected void onStop() {
         super.onStop();
         timeoutHandler.removeCallbacks(passGo);

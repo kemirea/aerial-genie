@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
 
 import com.kemikalreaktion.genie.R;
+import com.kemikalreaktion.genie.Tag;
 import com.kemikalreaktion.genie.fragment.FragmentAbout;
 import com.kemikalreaktion.genie.fragment.FragmentBrowseMoves;
 import com.kemikalreaktion.genie.fragment.FragmentMain;
@@ -28,7 +29,7 @@ public class ActivityMain extends ActionBarActivity
         implements FragmentNavigationDrawer.NavigationDrawerCallbacks,
         SearchView.OnQueryTextListener {
 
-    private static final String TAG = "ActivityMain";
+    private static final String TAG = Tag.APP_TAG + "ActivityMain";
     private static final boolean DBG = true;
 
     private FragmentMain fMain;

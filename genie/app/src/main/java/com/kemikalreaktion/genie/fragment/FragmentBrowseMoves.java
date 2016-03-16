@@ -62,6 +62,6 @@ public class FragmentBrowseMoves extends Fragment {
     }
 
     private void selectTrick(int position) {
-        Toast.makeText(getActivity().getBaseContext(), TrickCatalog.findById(position) + " selected!", Toast.LENGTH_LONG).show();
+        Toast.makeText(getActivity().getBaseContext(), TrickCatalog.findById(position+1) + " selected!", Toast.LENGTH_SHORT).show();
     }
 }

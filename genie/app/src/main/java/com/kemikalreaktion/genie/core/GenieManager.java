@@ -32,8 +32,6 @@ public class GenieManager extends Application {
     public GenieManager() {
         instance = this;
         trickCatalog = new TrickCatalog();
-
-        TrickCatalog.generateTestCatalog();
     }
 
     protected void loadData() {

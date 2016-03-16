@@ -10,14 +10,16 @@ import android.util.Log;
 import android.view.Menu;
 
 import com.kemikalreaktion.genie.R;
+import com.kemikalreaktion.genie.Tag;
 
 public class ActivitySearch extends ActionBarActivity {
+    private static final String TAG = Tag.APP_TAG + "ActivitySearch";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         handleIntent(getIntent());
-        Log.v("ActivitySearch", "search activity created!");
+        Log.v(TAG, "search activity created!");
     }
 
     @Override
@@ -26,6 +28,7 @@ public class ActivitySearch extends ActionBarActivity {
     }
 
     private void handleIntent(Intent intent) {
+        Log.v(TAG, "handleIntent: " + intent.toString());
         if (Intent.ACTION_SEARCH.equals(intent)) {
             String query = intent.getStringExtra(SearchManager.QUERY);
         }

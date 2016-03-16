@@ -13,14 +13,13 @@ import java.util.HashMap;
 import java.util.List;
 
 // TODO: class should be updated to retrieve data from DatabaseContentProvider
+//       it may also need to be renamed to better describe its functionality
 public class TrickCatalog {
     private static final String TAG = Tag.APP_TAG + ".TrickCatalog";
     private static TrickCatalog instance;
-    private static HashMap<Integer, Trick> allTricks;
 
     public TrickCatalog() {
         instance = this;
-        allTricks = new HashMap<Integer, Trick>();
     }
 
     public TrickCatalog getInstance() {
@@ -31,20 +30,27 @@ public class TrickCatalog {
     }
 
     public static Trick findById(int id) {
-        return allTricks.get(id);
+        String clause = Tag.MOVESET_ID + " = ?";
+        String[] args = {Integer.toString(id)};
+        ArrayList<Trick> tricks = getTricks(clause, args, null);
+        if (tricks != null && !tricks.isEmpty()) {
+            return tricks.get(0);
+        }
+        else {
+            return null;
+        }
     }
 
-    /**
-     * Returns the list of all tricks in catalog
-     * @return      the list of all tricks in TrickCatalog
-     */
-    public static ArrayList<Trick> getAllTricks() {
+    private static ArrayList<Trick> getTricks(String selectionClause,
+                                              String[] selectionArgs,
+                                              String sortOrder) {
         ArrayList<Trick> trickList = new ArrayList<>();
         Uri uri = Uri.parse(Tag.CONTENT_AUTHORITY + Tag.MOVESET_TABLE_NAME);
         String[] projection = {Tag.MOVESET_ID,
-                               Tag.MOVESET_NAME,
-                               Tag.MOVESET_IMG};
-        Cursor mCursor = GenieManager.getResolver().query(uri, projection, null, null, null);
+                Tag.MOVESET_NAME,
+                Tag.MOVESET_IMG};
+        Cursor mCursor = GenieManager.getResolver().query(
+                uri, projection, selectionClause, selectionArgs, sortOrder);
 
         if (mCursor != null) {
             int idIndex = mCursor.getColumnIndex(Tag.MOVESET_ID);
@@ -54,8 +60,6 @@ public class TrickCatalog {
                 int id = mCursor.getInt(idIndex);
                 String name = mCursor.getString(nameIndex);
                 String img = mCursor.getString(imgIndex);
-                Log.i(TAG, "got new trick: " + name);
-
                 Trick mTrick = new Trick(id, name, img);
                 trickList.add(mTrick);
             }
@@ -63,6 +67,14 @@ public class TrickCatalog {
         }
 
         return trickList;
+    }
+
+    /**
+     * Returns the list of all tricks in catalog
+     * @return      the list of all tricks in TrickCatalog
+     */
+    public static ArrayList<Trick> getAllTricks() {
+        return getTricks(null, null, null);
     }
 
     // TODO: add favorited property? or create new table for favorites?
@@ -75,11 +87,11 @@ public class TrickCatalog {
     public static ArrayList<Trick> getFavoriteTricks() {
         ArrayList<Trick> favorites = new ArrayList<>();
 
-        for (Trick trick : allTricks.values()) {
+        /*for (Trick trick : allTricks.values()) {
             if (trick.isFavorite()) {
                 favorites.add(trick);
             }
-        }
+        }*/
 
         return favorites;
     }
@@ -90,43 +102,16 @@ public class TrickCatalog {
      * @return          a list of tricks matching the search query
      */
     public static ArrayList<Trick> findWithName(String query) {
-        ArrayList<Trick> results = new ArrayList<>();
+        ArrayList<Trick> results;
 
-        //Search for tricks beginning with query first
-        for (Trick trick : allTricks.values() ) {
-            if (trick.getName().toLowerCase().startsWith(query.toLowerCase())) {
-                results.add(trick);
-            }
+        String clause = Tag.MOVESET_NAME + " LIKE %?%";
+        String[] args = {query};
+        results = getTricks(clause, args, null);
+        if (results != null && !results.isEmpty()) {
+            return results;
         }
-
-        // Search again for tricks containing query
-        for(Trick trick : allTricks.values()) {
-            if (trick.getName().toLowerCase().contains(query.toLowerCase())
-                    && !results.contains(trick)) {
-                results.add(trick);
-            }
+        else {
+            return null;
         }
-
-        return results;
-    }
-
-    public static TrickCatalog generateTestCatalog() {
-        String nameList[] = {"Fireman Spin",
-                             "Cupid",
-                             "Genie",
-                             "Jasmine",
-                             "Superman",
-                             "Basic Invert",
-                             "Wrist Seat",
-                             "Butterfly",
-                             "Ballerina",
-                             "Twisted Ballerina"};
-        int idCount = 0;
-
-        for (String name : nameList) {
-            idCount++;
-        }
-
-        return instance;
     }
 }

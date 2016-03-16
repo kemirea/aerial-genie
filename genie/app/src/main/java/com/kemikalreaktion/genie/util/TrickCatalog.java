@@ -1,11 +1,20 @@
 package com.kemikalreaktion.genie.util;
 
+import android.database.Cursor;
+import android.net.Uri;
+import android.util.Log;
+
+import com.kemikalreaktion.genie.Tag;
+import com.kemikalreaktion.genie.core.GenieManager;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
+// TODO: class should be updated to retrieve data from DatabaseContentProvider
 public class TrickCatalog {
+    private static final String TAG = Tag.APP_TAG + ".TrickCatalog";
     private static TrickCatalog instance;
     private static HashMap<Integer, Trick> allTricks;
 
@@ -21,19 +30,6 @@ public class TrickCatalog {
         return instance;
     }
 
-    /**
-     * add trick to catalog
-     * return true if successful
-     */
-    public static boolean addTrick(Trick trick) {
-        if (null != allTricks.put(trick.getId(), trick)) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-
     public static Trick findById(int id) {
         return allTricks.get(id);
     }
@@ -43,9 +39,35 @@ public class TrickCatalog {
      * @return      the list of all tricks in TrickCatalog
      */
     public static ArrayList<Trick> getAllTricks() {
-        return new ArrayList<>(allTricks.values());
+        ArrayList<Trick> trickList = new ArrayList<>();
+        Uri uri = Uri.parse(Tag.CONTENT_AUTHORITY + Tag.MOVESET_TABLE_NAME);
+        String[] projection = {Tag.MOVESET_ID,
+                               Tag.MOVESET_NAME,
+                               Tag.MOVESET_IMG};
+        Cursor mCursor = GenieManager.getResolver().query(uri, projection, null, null, null);
+
+        if (mCursor != null) {
+            int idIndex = mCursor.getColumnIndex(Tag.MOVESET_ID);
+            int nameIndex = mCursor.getColumnIndex(Tag.MOVESET_NAME);
+            int imgIndex = mCursor.getColumnIndex(Tag.MOVESET_IMG);
+            while (mCursor.moveToNext()) {
+                int id = mCursor.getInt(idIndex);
+                String name = mCursor.getString(nameIndex);
+                String img = mCursor.getString(imgIndex);
+                Log.i(TAG, "got new trick: " + name);
+
+                Trick mTrick = new Trick(id, name, img);
+                trickList.add(mTrick);
+            }
+            mCursor.close();
+        }
+
+        return trickList;
     }
 
+    // TODO: add favorited property? or create new table for favorites?
+    //       latter is probably better option so that tricks DB can be
+    //       updated without erasing favorites
     /**
      * Returns a list of favorited tricks
      * @return      a list of favorited tricks
@@ -102,7 +124,6 @@ public class TrickCatalog {
         int idCount = 0;
 
         for (String name : nameList) {
-            addTrick(new Trick(idCount, name));
             idCount++;
         }
 

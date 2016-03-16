@@ -1,6 +1,8 @@
 package com.kemikalreaktion.genie.core;
 
 import android.app.Application;
+import android.content.ContentProvider;
+import android.content.ContentResolver;
 import android.util.Log;
 
 import com.kemikalreaktion.genie.R;
@@ -34,7 +36,7 @@ public class GenieManager extends Application {
         TrickCatalog.generateTestCatalog();
     }
 
-    public void loadData() {
+    protected void loadData() {
         // read in xml data
         // we really only want to do this when the DB has been updated...
         try {
@@ -58,5 +60,9 @@ public class GenieManager extends Application {
             instance = new GenieManager();
         }
         return instance;
+    }
+
+    public static ContentResolver getResolver() {
+        return getInstance().getContentResolver();
     }
 }

@@ -102,10 +102,14 @@ public class TrickCatalog {
      * @return          a list of tricks matching the search query
      */
     public static ArrayList<Trick> findWithName(String query) {
-        ArrayList<Trick> results;
+        ArrayList<Trick> results = new ArrayList<>();
+        if (query == null || query.isEmpty()) {
+            // if no search argument, just return the empty array.
+            return results;
+        }
 
-        String clause = Tag.MOVESET_NAME + " LIKE %?%";
-        String[] args = {query};
+        String clause = Tag.MOVESET_NAME + " LIKE ?";
+        String[] args = {"%" + query + "%"};
         results = getTricks(clause, args, null);
         if (results != null && !results.isEmpty()) {
             return results;

@@ -129,6 +129,7 @@ public class ActivityMain extends ActionBarActivity
     }
 
     public void setTitle(String title) {
+        Log.i(TAG, "set title to " + title);
         mTitle = title;
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(mTitle);
@@ -136,9 +137,11 @@ public class ActivityMain extends ActionBarActivity
     }
 
     public void restoreActionBar() {
+        Log.i(TAG, "restore actionbar to " + mTitle);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(mTitle);
+
     }
 
     @Override
@@ -155,6 +158,7 @@ public class ActivityMain extends ActionBarActivity
             menuSearch = menu.findItem(R.id.search);
             searchView = (SearchView) menu.findItem(R.id.search).getActionView();
             searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+            searchView.setOnQueryTextListener(this);
             MenuItemCompat.setOnActionExpandListener(menuSearch, new MenuItemCompat.OnActionExpandListener() {
                 @Override
                 public boolean onMenuItemActionExpand(MenuItem menuItem) {

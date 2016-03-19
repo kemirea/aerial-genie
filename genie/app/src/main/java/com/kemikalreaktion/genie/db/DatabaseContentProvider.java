@@ -61,7 +61,6 @@ public class DatabaseContentProvider extends ContentProvider {
 
     @Override
     public synchronized Uri insert(Uri uri, ContentValues values) {
-        Uri resultUri = uri;
         String table = "";
         List<String> uriSegments = uri.getPathSegments();
         for(String segment : uriSegments) {
@@ -75,12 +74,11 @@ public class DatabaseContentProvider extends ContentProvider {
 
         db = dbHelper.getWritableDatabase();
         Log.d(TAG, "insert for " + table + " table");
-        resultUri = uri.buildUpon()
+
+        return uri.buildUpon()
                 .appendEncodedPath(
                         Objects.toString(db.insert(table, null, values), null))
                 .build();
-
-        return resultUri;
     }
 
     @Override

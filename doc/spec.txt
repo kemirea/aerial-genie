@@ -24,3 +24,13 @@ SIMILAR OPTIONS:
 - Pole Dance Dictionary
 - Spin City Pole Bible
 - Pocket Pole Studio
+
+
+
+TODO:
+- AWS server integration for tricks DB (should be in XML format)
+- AWS server integration for trick images
+- Google Sign-in integration
+- AWS server integration for favorites DB on per-user basis
+- Implement tricks details page
+- Tricks list UI overhaul

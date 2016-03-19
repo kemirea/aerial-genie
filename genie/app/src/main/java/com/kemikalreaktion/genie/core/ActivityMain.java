@@ -16,13 +16,13 @@ import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
 
 import com.kemikalreaktion.genie.R;
-import com.kemikalreaktion.genie.Tag;
 import com.kemikalreaktion.genie.fragment.FragmentAbout;
 import com.kemikalreaktion.genie.fragment.FragmentBrowseMoves;
 import com.kemikalreaktion.genie.fragment.FragmentMain;
 import com.kemikalreaktion.genie.fragment.FragmentNavigationDrawer;
 import com.kemikalreaktion.genie.fragment.FragmentSearchResults;
 import com.kemikalreaktion.genie.fragment.FragmentYourMoves;
+import com.kemikalreaktion.genie.Tag;
 
 
 public class ActivityMain extends ActionBarActivity
@@ -146,32 +146,35 @@ public class ActivityMain extends ActionBarActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (!mFragmentNavigationDrawer.isDrawerOpen() && fBrowseMoves.isVisible()) {
-            // Only show items in the action bar relevant to this screen
-            // if the drawer is not showing. Otherwise, let the drawer
-            // decide what to show in the action bar.
-            getMenuInflater().inflate(R.menu.menu_main, menu);
+        if (!mFragmentNavigationDrawer.isDrawerOpen()) {
             restoreActionBar();
 
-            // Associate searchable configuration with the SearchView
-            SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-            menuSearch = menu.findItem(R.id.search);
-            searchView = (SearchView) menu.findItem(R.id.search).getActionView();
-            searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-            searchView.setOnQueryTextListener(this);
-            MenuItemCompat.setOnActionExpandListener(menuSearch, new MenuItemCompat.OnActionExpandListener() {
-                @Override
-                public boolean onMenuItemActionExpand(MenuItem menuItem) {
-                    navigateTo(fSearchResults);
-                    return true;
-                }
+            if (fBrowseMoves.isVisible()) {
+                // Only show items in the action bar relevant to this screen
+                // if the drawer is not showing. Otherwise, let the drawer
+                // decide what to show in the action bar.
+                getMenuInflater().inflate(R.menu.menu_main, menu);
 
-                @Override
-                public boolean onMenuItemActionCollapse(MenuItem menuItem) {
-                    navigateTo(fBrowseMoves);
-                    return true;
-                }
-            });
+                // Associate searchable configuration with the SearchView
+                SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+                menuSearch = menu.findItem(R.id.search);
+                searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+                searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+                searchView.setOnQueryTextListener(this);
+                MenuItemCompat.setOnActionExpandListener(menuSearch, new MenuItemCompat.OnActionExpandListener() {
+                    @Override
+                    public boolean onMenuItemActionExpand(MenuItem menuItem) {
+                        navigateTo(fSearchResults);
+                        return true;
+                    }
+
+                    @Override
+                    public boolean onMenuItemActionCollapse(MenuItem menuItem) {
+                        navigateTo(fBrowseMoves);
+                        return true;
+                    }
+                });
+            }
             return true;
         }
         return super.onCreateOptionsMenu(menu);

@@ -8,9 +8,6 @@ import com.kemikalreaktion.genie.Tag;
 import com.kemikalreaktion.genie.core.GenieManager;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
 
 // TODO: class should be updated to retrieve data from DatabaseContentProvider
 //       it may also need to be renamed to better describe its functionality
@@ -60,8 +57,10 @@ public class TrickCatalog {
                 int id = mCursor.getInt(idIndex);
                 String name = mCursor.getString(nameIndex);
                 String img = mCursor.getString(imgIndex);
-                Trick mTrick = new Trick(id, name, img);
-                trickList.add(mTrick);
+                if (id > 0 && name != null) {
+                    Trick mTrick = new Trick(id, name, img);
+                    trickList.add(mTrick);
+                }
             }
             mCursor.close();
         }
@@ -87,12 +86,6 @@ public class TrickCatalog {
     public static ArrayList<Trick> getFavoriteTricks() {
         ArrayList<Trick> favorites = new ArrayList<>();
 
-        /*for (Trick trick : allTricks.values()) {
-            if (trick.isFavorite()) {
-                favorites.add(trick);
-            }
-        }*/
-
         return favorites;
     }
 
@@ -108,9 +101,17 @@ public class TrickCatalog {
             return results;
         }
 
+        // search for moves beginning with query first
+        // so that they show up at the top of the list
         String clause = Tag.MOVESET_NAME + " LIKE ?";
-        String[] args = {"%" + query + "%"};
-        results = getTricks(clause, args, null);
+        String[] arg1 = {"%" + query + "%"};
+        results = getTricks(clause, arg1, null);
+
+        // now search for any move containing the query
+        /*clause = Tag.MOVESET_NAME + " LIKE ?";
+        String[] arg2 = {"%" + query + "%"};
+        ArrayList<com.kemikalreaktion.genie.util.Trick> addResults = getTricks(clause, arg2, null);*/
+
         if (results != null && !results.isEmpty()) {
             return results;
         }

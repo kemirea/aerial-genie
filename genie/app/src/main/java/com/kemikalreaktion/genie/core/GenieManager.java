@@ -1,26 +1,19 @@
 package com.kemikalreaktion.genie.core;
 
 import android.app.Application;
-import android.content.ContentProvider;
 import android.content.ContentResolver;
 import android.util.Log;
 
 import com.kemikalreaktion.genie.R;
 import com.kemikalreaktion.genie.Tag;
-import com.kemikalreaktion.genie.db.DatabaseContentProvider;
 import com.kemikalreaktion.genie.db.XmlParser;
-import com.kemikalreaktion.genie.util.Trick;
 import com.kemikalreaktion.genie.util.TrickCatalog;
 
-import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 
 public class GenieManager extends Application {
     private static final String TAG = Tag.APP_TAG + "Manager";

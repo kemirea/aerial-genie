@@ -26,6 +26,15 @@ public class Trick {
         this.img = img;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o.getClass() != Trick.class) {
+            return false;
+        }
+
+        return (this.getId() == ((Trick) o).getId());
+    }
+
     public String getName() {
         return name;
     }

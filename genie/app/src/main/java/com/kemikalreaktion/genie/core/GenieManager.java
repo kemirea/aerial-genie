@@ -23,6 +23,7 @@ public class GenieManager extends Application {
     private TrickCatalog trickCatalog;
 
     public GenieManager() {
+        Log.v(TAG, "GenieManager");
         instance = this;
         trickCatalog = new TrickCatalog();
     }

@@ -2,6 +2,7 @@ package com.kemikalreaktion.genie.core;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,40 +19,45 @@ public class ActivitySplash extends Activity{
     {
         super.onCreate(savedInstanceState);
 
-        if (Build.VERSION.SDK_INT < 16) {
-            // Hide notification bar for Android 4.0 and lower
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        }
-        else {
-            // Hide notification bar for Android 4.1 and higher
-            View decorView = getWindow().getDecorView();
-            decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
-        }
+        View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_splash);
-
-        timeoutHandler = new Handler();
-        timeoutHandler.postDelayed(passGo, 2000);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        GenieManager.getInstance().loadData();
+        new LoadDataTask().execute();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        timeoutHandler.removeCallbacks(passGo);
         finish();
     }
 
-    private Runnable passGo = new Runnable() {
+    private class LoadDataTask extends AsyncTask<Void, Integer, Boolean> {
         @Override
-        public void run() {
-            startActivity(new Intent(getApplicationContext(), ActivityMain.class));
+        protected void onPostExecute(Boolean result) {
+            //startActivity(new Intent(getApplicationContext(), ActivityMain.class));
+            startActivity(new Intent(getApplicationContext(), ActivityTest.class));
         }
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            GenieManager.getInstance().loadData();
+            try {
+                Thread.sleep(2000);
+            }
+            catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return true;
+        }
+
+        protected void onProgressUpdate(Integer... progress) {
+        }
+
     };
 }

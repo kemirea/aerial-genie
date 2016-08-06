@@ -12,6 +12,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -100,7 +101,7 @@ public class FragmentNavigationDrawer extends Fragment {
             }
         });
         mDrawerListView.setAdapter(new ArrayAdapter<String>(
-                ((ActionBarActivity) getActivity()).getSupportActionBar().getThemedContext(),
+                ((AppCompatActivity) getActivity()).getSupportActionBar().getThemedContext(),
                 R.layout.drawer_list_item,
                 R.id.list_item_text,
                 new String[]{

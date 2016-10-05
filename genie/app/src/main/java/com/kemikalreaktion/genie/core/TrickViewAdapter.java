@@ -23,7 +23,6 @@ import java.util.ArrayList;
 public class TrickViewAdapter extends RecyclerView.Adapter<TrickViewAdapter.ViewHolder> {
     private static final String TAG = Tag.APP_TAG + "TrickViewAdapter";
     ArrayList<Trick> tricks;
-    //ArrayList<String> tricks;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView img;
@@ -35,17 +34,6 @@ public class TrickViewAdapter extends RecyclerView.Adapter<TrickViewAdapter.View
 
     public TrickViewAdapter() {
         tricks = TrickCatalog.getAllTricks();
-        /*tricks = new ArrayList<>();
-        tricks.add("http://imgur.com/zGvSDQJ");
-        tricks.add("http://imgur.com/PUf63rI");
-        tricks.add("http://imgur.com/fGrAGrb");
-        tricks.add("http://imgur.com/VemIfxQ");
-        tricks.add("http://imgur.com/EV5VY5m");
-        tricks.add("http://imgur.com/WIHKX5U");
-        tricks.add("http://imgur.com/pKI3a3m");
-        tricks.add("http://imgur.com/pS1Q1Qa");
-        tricks.add("http://imgur.com/i2Fo7PN");
-        tricks.add("http://imgur.com/nenXqc0");*/
     }
 
     @Override

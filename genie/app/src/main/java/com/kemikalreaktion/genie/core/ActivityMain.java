@@ -8,8 +8,11 @@ import android.support.v7.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,7 +28,7 @@ import com.kemikalreaktion.genie.fragment.FragmentYourMoves;
 import com.kemikalreaktion.genie.Tag;
 
 
-public class ActivityMain extends ActionBarActivity
+public class ActivityMain extends AppCompatActivity
         implements FragmentNavigationDrawer.NavigationDrawerCallbacks,
         SearchView.OnQueryTextListener {
 
@@ -54,9 +57,24 @@ public class ActivityMain extends ActionBarActivity
         fAbout = FragmentAbout.newInstance(getString(R.string.title_about));
         fSearchResults = new FragmentSearchResults();
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+
         mFragmentNavigationDrawer = (FragmentNavigationDrawer)
                 getFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
+/*
+        RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview);
+        mRecyclerView.setHasFixedSize(true);
+
+        // set recycler view layout manager
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        // set recycler view adapter
+        TrickViewAdapter mAdapter = new TrickViewAdapter();
+        mRecyclerView.setAdapter(mAdapter);*/
 
         // Set up the drawer.
         mFragmentNavigationDrawer.setUp(

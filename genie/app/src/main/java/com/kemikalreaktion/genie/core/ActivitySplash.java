@@ -41,7 +41,7 @@ public class ActivitySplash extends Activity{
         @Override
         protected void onPostExecute(Boolean result) {
             //startActivity(new Intent(getApplicationContext(), ActivityMain.class));
-            startActivity(new Intent(getApplicationContext(), ActivityTest.class));
+            startActivity(new Intent(getApplicationContext(), ActivityMain.class));
         }
 
         @Override

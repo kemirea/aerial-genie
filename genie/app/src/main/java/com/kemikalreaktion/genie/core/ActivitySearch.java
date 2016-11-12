@@ -3,12 +3,12 @@ package com.kemikalreaktion.genie.core;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.kemikalreaktion.genie.Tag;
 
-public class ActivitySearch extends ActionBarActivity {
+public class ActivitySearch extends AppCompatActivity {
     private static final String TAG = Tag.APP_TAG + "ActivitySearch";
 
     @Override

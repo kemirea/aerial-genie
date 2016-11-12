@@ -2,8 +2,8 @@ package com.kemikalreaktion.genie.fragment;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +45,7 @@ public class FragmentBrowseMoves extends Fragment {
             }
         });
         browseListView.setAdapter(new ArrayAdapter<Trick>(
-                ((ActionBarActivity) getActivity()).getSupportActionBar().getThemedContext(),
+                getActivity(),
                 R.layout.trick_row,
                 R.id.trickRowText,
                 TrickCatalog.getAllTricks()) {
@@ -56,9 +56,9 @@ public class FragmentBrowseMoves extends Fragment {
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        ((ActivityMain) activity).setTitle(PAGE_TITLE);
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        ((ActivityMain) context).setTitle(PAGE_TITLE);
     }
 
     private void selectTrick(int position) {

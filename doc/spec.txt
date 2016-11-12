@@ -27,10 +27,4 @@ SIMILAR OPTIONS:
 
 
 
-TODO:
-- AWS server integration for tricks DB (should be in XML format)
-- AWS server integration for trick images
-- Google Sign-in integration
-- AWS server integration for favorites DB on per-user basis
-- Implement tricks details page
-- Tricks list UI overhaul
+Tasks and features now being tracked at: https://www.pivotaltracker.com/n/projects/1920599

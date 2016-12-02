@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<moveset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<move>
+		<id>1</id>
+		<name>Ballerina</name>
+		<img>http://i.imgur.com/vckohBE.jpg</img>
+	</move>
+	<move>
+		<id>2</id>
+		<name>Fireman Spin</name>
+	</move>
+	<move>
+		<id>3</id>
+		<name>Twisted Ballerina</name>
+	</move>
+	<move>
+		<id>4</id>
+		<name>Basic Invert</name>
+	</move>
+	<move>
+		<id>5</id>
+		<name>Jasmine</name>
+	</move>
+	<move>
+		<id>6</id>
+		<name>Superman</name>
+	</move>
+	<move>
+		<id>7</id>
+		<name>Cupid</name>
+	</move>
+	<move>
+		<id>8</id>
+		<name>Butterfly</name>
+	</move>
+	<move>
+		<id>9</id>
+		<name>Wrist Seat</name>
+	</move>
+	<move>
+		<id>10</id>
+		<name>Genie</name>
+	</move>
+</moveset>
